@@ -12,7 +12,8 @@ elif figure_type == 2:
     side_a = float(input('Введите зачение длины 1 стороны: '))
     side_b = float(input('Введите зачение длины 2 стороны: '))
     side_c = float(input('Введите зачение длины 3 стороны: '))
-    area = round((side_a + side_b + side_c) / 2, 2)
+    sp = (side_a + side_b + side_c) / 2
+    area = round(math.sqrt(sp * (sp - side_a) * (sp - side_b) * (sp - side_c)), 2)
     print(f'Площадь треугольника равна: {area}')
 else:
     print('Вы выбрали рачет плащади прямоугольника.')
