@@ -25,7 +25,7 @@ cook_book = {
     ]
 }
 total_ingrids = {}
-portion = int(input('Введите колиечество порций: '))
+portion = int(input('Введите количество порций: '))
 for dish in cook_book.values():
     for ingr in dish:
         if ingr['ingridient_name'] not in total_ingrids.keys():
