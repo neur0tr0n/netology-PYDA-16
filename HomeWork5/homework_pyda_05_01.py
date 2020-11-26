@@ -10,5 +10,4 @@ for line in file_purchase:
     purchase = json.loads(line)
     dict_purchase[purchase['user_id']] = purchase['category']
 file_purchase.close()
-
 print(dict_purchase)
