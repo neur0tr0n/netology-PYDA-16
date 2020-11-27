@@ -5,19 +5,21 @@ quotes = {}
 fix_list = []
 
 
-def get_value(fix_val):
-    val = fix_val.split('=')
-    if get_key(fix_val) in (8, 35, 49, 55, 56, 262):
+def get_value(fix_lin):
+    val = fix_lin.split('=')
+    if int(val[0]) in (8, 35, 49, 55, 56, 262):
         ret_val = str(val[1])
-    elif get_key(fix_val) in (9, 268, 279, 269, 278, 280, 271):
+    elif int(val[0]) in (9, 268, 279, 269, 278, 280, 271):
         ret_val = int(val[1])
-    elif get_key(fix_val) in (270):
-        ret_val = float(val[0])
+    elif int(val[0]) in (270):
+        ret_val = float(val[1])
+    else:
+        ret_val = val[1]
     return ret_val
 
 
-def get_key(fix_val):
-    val = fix_val.split('=')
+def get_key(fix_lin):
+    val = fix_lin.split('=')
     return int(val[0])
 
 
@@ -28,8 +30,11 @@ for line in log_file:
         fix_line = fix_line[indx:]
         fix_line = fix_line.split('')
         if get_value(fix_line[1]) > 400:
-            if fix_line[13] == '55=USD/RUB_TOD':
-                print(fix_line)
+            print(fix_line)
+            print(get_value(fix_line[13]))
+
+            if get_value(fix_line[13]) == 'USD/RUB_TOD':
+                print(fix_line)#, get_value(fix_line[10]), get_value(fix_line[13]), get_value(fix_line[14]), get_value(fix_line[17]), get_value(fix_line[20]))
 
 
 
