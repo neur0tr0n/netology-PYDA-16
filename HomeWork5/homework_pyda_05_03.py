@@ -1,8 +1,8 @@
 import json
-
-log_file = open('/Users/neur0tr0n/Downloads/Downloads/visit_log.csv', 'r')
-purchase_file = open('/Users/neur0tr0n/Downloads/Downloads/purchase_log.txt', 'r')
-funnel_file = open('/Users/neur0tr0n/Downloads/Downloads/funnel_2.csv', 'w')
+directory = 'C:\\Users\\boris\\Downloads\\Downloads\\'
+log_file = open(directory + 'visit_log.csv', 'r')
+purchase_file = open(directory + 'purchase_log.txt', 'r')
+funnel_file = open(directory + 'funnel_2.csv', 'w')
 purchases = {}
 purchase = {}
 purchases_len = 0
