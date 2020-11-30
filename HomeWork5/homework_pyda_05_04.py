@@ -11,7 +11,7 @@ def get_value(fix_lin):
         ret_val = str(val[1])
     elif int(val[0]) in (9, 268, 279, 269, 278, 280, 271):
         ret_val = int(val[1])
-    elif int(val[0]) in (270):
+    elif int(val[0]) in (270, 270):
         ret_val = float(val[1])
     else:
         ret_val = val[1]
@@ -29,12 +29,15 @@ for line in log_file:
     if indx != -1:
         fix_line = fix_line[indx:]
         fix_line = fix_line.split('')
-        if get_value(fix_line[1]) > 400:
-            print(fix_line)
-            print(get_value(fix_line[13]))
-
+        if get_value(fix_line[1]) > 200:
             if get_value(fix_line[13]) == 'USD/RUB_TOD':
-                print(fix_line)#, get_value(fix_line[10]), get_value(fix_line[13]), get_value(fix_line[14]), get_value(fix_line[17]), get_value(fix_line[20]))
+                str_ = ''
+                for item in fix_line:
+                    str_ = str_ + item + ' '
+                str_ = str_.strip().replace('=', ',').replace(' ', ',') + '\n'
+                print(str_)#, get_value(fix_line[10]), get_value(fix_line[13]), get_value(fix_line[14]), get_value(fix_line[17]), get_value(fix_line[20]))
+                fix_file.write(str_)
+fix_file.close()
 
 
 
