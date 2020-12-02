@@ -38,6 +38,7 @@ date_list = []
 if check_date_btlt(start_date, end_date) and check_date(start_date) and check_date(end_date):
     date_list = get_date_list(start_date, end_date)
 else:
-    date_list = []
+    date_list = date_list
+print(type(date_list))
 for item in date_list:
     print(item.strftime('%Y-%m-%d'))
