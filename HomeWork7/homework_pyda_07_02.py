@@ -8,22 +8,30 @@ import requests
 
 
 class Rate:
+    diff = False
+
     def __init__(self, diff=False):
         self.diff = diff
 
-    def get_quotes(self, currency):
+    def get_quotes(self, currency=''):
         quotes = {}
         currs = {}
-        req = requests.get('https://www.cbr-xml-daily.ru/daily_json.js')
-        currs = req.json()['Valute']
-        cur = currs[currency]
-        if self.diff:
-            quotes[cur['CharCode']] = round(cur['Previous'] - cur['Value'], 4)
+        currs = requests.get('https://www.cbr-xml-daily.ru/daily_json.js').json()['Valute']
+        if currency == '':
+            for cur in currs.values():
+                if self.diff:
+                    quotes[cur['CharCode']] = round(cur['Previous'] - cur['Value'], 4)
+                else:
+                    quotes[cur['CharCode']] = cur['Value']
         else:
-            quotes[cur['CharCode']] = cur['Value']
+            cur = currs[currency]
+            if self.diff:
+                quotes[cur['CharCode']] = round(cur['Previous'] - cur['Value'], 4)
+            else:
+                quotes[cur['CharCode']] = cur['Value']
         return quotes
 
 
 quotes = Rate()
 #quotes.diff = True
-print(quotes.get_quotes('EUR'))
+print(quotes.get_quotes('USD'))
