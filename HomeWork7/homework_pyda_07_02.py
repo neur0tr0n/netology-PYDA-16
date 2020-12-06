@@ -11,19 +11,19 @@ class Rate:
     def __init__(self, diff=False):
         self.diff = diff
 
-    def get_quotes(self) -> None:
+    def get_quotes(self, currency):
         quotes = {}
         currs = {}
         req = requests.get('https://www.cbr-xml-daily.ru/daily_json.js')
         currs = req.json()['Valute']
-        for curr, values in currs.items():
-            if self.diff:
-                quotes[values['CharCode']] = round(values['Previous'] - values['Value'], 4)
-            else:
-                quotes[values['CharCode']] = values['Value']
+        cur = currs[currency]
+        if self.diff:
+            quotes[cur['CharCode']] = round(cur['Previous'] - cur['Value'], 4)
+        else:
+            quotes[cur['CharCode']] = cur['Value']
         return quotes
 
 
 quotes = Rate()
 #quotes.diff = True
-print(quotes.get_quotes())
+print(quotes.get_quotes('EUR'))
