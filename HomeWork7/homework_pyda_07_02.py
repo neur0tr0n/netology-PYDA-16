@@ -25,5 +25,5 @@ class Rate:
 
 
 quotes = Rate()
-quotes.diff = True
+#quotes.diff = True
 print(quotes.get_quotes())
