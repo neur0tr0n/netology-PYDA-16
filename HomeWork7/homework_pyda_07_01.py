@@ -8,14 +8,14 @@ import requests
 def get_max_value_cur():
     cur_lib = {}
     max_val = 0
-    max_val_cur = ''
+    cur_name = ''
     req = requests.get("https://www.cbr-xml-daily.ru/daily_json.js")
     cur_lib = req.json()['Valute']
-    for cur, lib_ in cur_lib.items():
-        if max_val <= lib_['Value']:
-            max_val = lib_['Value']
-            max_val_cur = cur
-    return max_val_cur
+    for cur, args in cur_lib.items():
+        if max_val <= args['Value']:
+            max_val = args['Value']
+            cur_name = args['Name']
+    return cur_name
 
 
 def get_cur_values():
