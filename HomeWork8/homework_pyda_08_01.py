@@ -6,10 +6,9 @@
 import re
 
 user_input = input('Введите регистрационный номер транстпортного стредства: ').upper()
-reg_exp = re.compile(r'[РОМСТУХНАВЕК]{1}\d{3}[РОМСТУХНАВЕК]{2}\d{2,3}')
+reg_exp = re.compile(r'([РОМСТУХНАВЕК]{1}\d{3}[РОМСТУХНАВЕК]{2})(\d{2,3})')
 if reg_exp.search(user_input):
     reg_num = reg_exp.search(user_input)
-    num = reg_num.group(0)
-    print(f'Номер {num[:reg_num.span()[0] + 6]} валиден. Регион: {num[reg_num.span()[0] + 6:reg_num.span()[1]]}')
+    print(f'Номер {reg_num.group(1)} валиден. Регион: {reg_num.group(2)}')
 else:
     print('Номер не валиден.')
