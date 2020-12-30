@@ -23,10 +23,11 @@ def movie_classify(row):
     return rating
 
 
-movies_file = '/Users/neur0tr0n/Downloads/ml-latest-small-3/movies.csv'
-rating_file = '/Users/neur0tr0n/Downloads/ml-latest-small-3/ratings.csv'
-movies = pd.read_csv(movies_file)
-ratings = pd.read_csv(rating_file)
+path = '/Users/neur0tr0n/Downloads/ml-latest-small-3/'
+movies_file = 'movies.csv'
+rating_file = 'ratings.csv'
+movies = pd.read_csv(path + movies_file)
+ratings = pd.read_csv(path + rating_file)
 movie_rating = pd.merge(movies, ratings, how='left', on='movieId')
 movie_rating['class'] = movie_rating.apply(movie_classify, axis=1)
 print(movie_rating.head(10))

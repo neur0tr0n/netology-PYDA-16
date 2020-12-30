@@ -21,8 +21,8 @@ def get_region(row):
     return region
 
 
-in_file = '/Users/neur0tr0n/Downloads/ml-latest-small-3/keywords.csv'
-out_file = '/Users/neur0tr0n/Downloads/ml-latest-small-3/report.csv'
-keywords = pd.read_csv(in_file)
+path = '/Users/neur0tr0n/Downloads/ml-latest-small-3/'
+file = 'keywords.csv'
+keywords = pd.read_csv(path + file)
 keywords['region'] = keywords.apply(get_region, axis=1)
 print(keywords.query('region != \'undefined\'').head(10))
