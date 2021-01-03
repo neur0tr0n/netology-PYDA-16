@@ -6,6 +6,13 @@ import pandas as pd
 
 path = '/Users/neur0tr0n/Downloads/Python_13_join/ml-latest-small/'
 file = 'ratings.csv'
-ratings_df = pd.read_csv(path + file)
-print(ratings_df.head(10))
+ratings = pd.read_csv(path + file)
+ratings_max = ratings.groupby('userId').max()
+ratings_min = ratings.groupby('userId').min()
+ratings_count = ratings.groupby('userId').count()
+ratings_count['max'] = ratings_max['timestamp']
+ratings_count['min'] = ratings_min['timestamp']
+ratings_count['diff'] = ratings_count['max'] - ratings_count['min']
+mean_user_life = ratings_count.query('movieId > 100')['diff'].mean()
+print(mean_user_life)
 
