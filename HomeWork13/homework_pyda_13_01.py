@@ -110,4 +110,4 @@ print(article_list)
 # Расширеный поиск по текстам статей
 #article_list = get_articles(URL, KEYWORDS, full_search=True)
 #print('Поиск по полному тексту статьи.')
-print(article_list)
+#print(article_list)
