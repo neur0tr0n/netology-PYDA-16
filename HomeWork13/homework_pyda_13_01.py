@@ -26,7 +26,7 @@ def get_pages_count():
     Функция определения количества страниц ресурса по URL
     :return:
     """
-    reg_exp = re.compile(r'(\d{1,})')
+    reg_exp = re.compile(r'(\d+)')
     res = requests.get(URL, params=params)
     soup = bs(res.text, 'html.parser')
     last_page_url = soup.find('a', class_='toggle-menu__item-link toggle-menu__item-link_pagination toggle-menu__item-link_bordered').get('href')
