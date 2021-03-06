@@ -4,8 +4,13 @@
 # кратко описать результаты.
 import pandas as pd
 import re
+
+file_path = '/Users/neur0tr0n/Downloads/homework_14/horse_data.csv'
+header_file_path = '/Users/neur0tr0n/Downloads/homework_14/horse_data.names'
+pd.options.display.max_columns = 8
+
 reg_exp = re.compile(r'\d{1,}:.+')
-headers_file = open('/Users/neur0tr0n/Downloads/homework_14/horse_data.names', 'r')
+headers_file = open(header_file_path, 'r')
 df = pd.DataFrame()
 headers = reg_exp.findall(headers_file.read())
 # Можно вывести список всех полей полученных из файла horse_data.names
@@ -25,15 +30,14 @@ col_show = [
     '24: surgical lesion?',
     '28: cp_data'
 ]
-
-df = pd.read_csv('/Users/neur0tr0n/Downloads/homework_14/horse_data.csv', names=headers, usecols=col_show)
+df = pd.read_csv(file_path, columns=headers)
 df = pd.DataFrame.replace(df, '?', value=None)
 df = pd.DataFrame.replace(df, 9, 2)
 print(df.head())
 
 # ВЫВОДЫ
-print(df.describe(include='int'))
+print(df.describe())
 # 1. Более 75% лошадей составляют лошади возрастной категории 1, то есть старше 6 мес
 # 2. До 50% лошадей встречается паталогия
 print(df['1:  surgery?'].describe())
-# 3. В более чем 50% случаев, лошади подвергались хирургическому вмешательству.
+# 3. В более чем 50% случаев, исследованные лошади подвергались хирургическому вмешательству.
