@@ -26,12 +26,13 @@ col_show = [
     '9:  mucous membranes',
     '10: capillary refill time',
     '23: outcome',
-    '24: surgical lesion?',
-    '28: cp_data'
+    '24: surgical lesion?'
 ]
 
-df = pd.read_csv(file_path, columns=headers)
-print(df.head(10))
+df = pd.read_csv(file_path, names=headers, usecols=col_show)
 df = pd.DataFrame.replace(df, '?', value=None)
+#print(df.head(10))
+for header in headers:
+    s = pd.to_numeric(df['23: outcome'])
+    print(type(s))
 
-print(df[['4:  rectal temperature']].describe())

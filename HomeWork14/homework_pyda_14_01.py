@@ -27,17 +27,19 @@ col_show = [
     '9:  mucous membranes',
     '10: capillary refill time',
     '23: outcome',
-    '24: surgical lesion?',
-    '28: cp_data'
+    '24: surgical lesion?'
 ]
-df = pd.read_csv(file_path, columns=headers)
+df = pd.read_csv(file_path, names=headers, usecols=col_show)
 df = pd.DataFrame.replace(df, '?', value=None)
 df = pd.DataFrame.replace(df, 9, 2)
 print(df.head())
 
 # ВЫВОДЫ
 print(df.describe())
-# 1. Более 75% лошадей составляют лошади возрастной категории 1, то есть старше 6 мес
-# 2. До 50% лошадей встречается паталогия
-print(df['1:  surgery?'].describe())
-# 3. В более чем 50% случаев, исследованные лошади подвергались хирургическому вмешательству.
+# 1. 75% лошадей составляют лошади возрастной категории 1, то есть старше 6 мес
+# 2. В 50% наблюдений имело место хирургическое поражение (surgical lesion)
+s = pd.to_numeric(df['1:  surgery?'])
+print(s.describe())
+# 3. В более чем 50% случаев, исследованные лошади подвергались хирургическому вмешательству (surgery?).
+s = pd.to_numeric(df['23: outcome'])
+print(s.describe())
