@@ -30,8 +30,6 @@ col_show = [
     '24: surgical lesion?'
 ]
 df = pd.read_csv(file_path, names=headers, usecols=col_show)
-df = pd.DataFrame.replace(df, '?', value=None)
-df = pd.DataFrame.replace(df, 9, 2)
 print(df.head())
 
 # ВЫВОДЫ

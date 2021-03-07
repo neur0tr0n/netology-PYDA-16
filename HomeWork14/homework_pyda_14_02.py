@@ -30,9 +30,24 @@ col_show = [
 ]
 
 df = pd.read_csv(file_path, names=headers, usecols=col_show)
-df = pd.DataFrame.replace(df, '?', value=None)
-#print(df.head(10))
-for header in headers:
-    s = pd.to_numeric(df['23: outcome'])
-    print(type(s))
+s = pd.Series
+# print(df.head(10))
+for col in col_show:
+    s = pd.to_numeric(df[col])
+    q1 = s.quantile(0.25)
+    q3 = s.quantile(0.75)
+    print(col)
+    print(s.min(), s.max())
+    print(q1, q3)
+    iqr = q3 - q1
+    lower_bound = q1 - (1.5 * iqr)
+    upper_bound = q3 + (1.5 * iqr)
+    print(lower_bound, upper_bound)
+    remove_outliers = df[df[col].between(lower_bound, upper_bound, inclusive=True)]
+    outliers = pd.concat([df, remove_outliers]).drop_duplicates(keep=False)
+    print(outliers)
 
+
+# Вывод: В выбранных полях исследуемой выборки обнаружены выбросы:
+# 1. Поле 2: Age. Выброс объясняется некорректной интрепретацией значения поля либо ошибкой передачи данных
+# 2. Поле 4: rectal temperature.
