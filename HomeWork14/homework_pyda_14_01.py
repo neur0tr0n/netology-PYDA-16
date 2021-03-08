@@ -29,7 +29,7 @@ col_show = [
     '23: outcome',
     '24: surgical lesion?'
 ]
-df = pd.read_csv(file_path, names=headers, usecols=col_show)
+df = pd.read_csv(file_path, names=headers, usecols=col_show, na_values='?')
 print(df.head())
 
 # ВЫВОДЫ

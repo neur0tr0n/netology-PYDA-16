@@ -28,5 +28,31 @@ col_show = [
     '24: surgical lesion?'
 ]
 
-df = pd.read_csv(file_path, names=headers, usecols=col_show)
+df = pd.read_csv(file_path, names=headers, na_values='?')
 print(df.head(10))
+print(df.isnull().sum())
+df_withoutna = df.dropna()
+print(df_withoutna.head(10))
+
+#ВЫВОДЫ
+# 1:  surgery?                                                     1
+# 4:  rectal temperature                                          60
+# 5:  pulse                                                       24
+# 6:  respiratory rate                                            58
+# 7:  temperature of extremities                                  56
+# 8:  peripheral pulse                                            69
+# 9:  mucous membranes                                            47
+# 10: capillary refill time                                       32
+# 11: pain - a subjective judgement of the horse's pain level     55
+# 12: peristalsis                                                 44
+# 13: abdominal distension                                        56
+# 14: nasogastric tube                                           104
+# 15: nasogastric reflux                                         106
+# 16: nasogastric reflux PH                                      247
+# 17: rectal examination - feces                                 102
+# 18: abdomen                                                    118
+# 19: packed cell volume                                          29
+# 20: total protein                                               33
+# 21: abdominocentesis appearance                                165
+# 22: abdomcentesis total protein                                198
+# 23: outcome                                                      1
