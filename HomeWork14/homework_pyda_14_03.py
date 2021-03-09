@@ -4,8 +4,8 @@
 import pandas as pd
 import re
 
-header_file_path = '/Users/neur0tr0n/Downloads/homework_14/horse_data.names'
-file_path = '/Users/neur0tr0n/Downloads/homework_14/horse_data.csv'
+header_file_path = 'horse_data.names'
+file_path = 'horse_data.csv'
 pd.options.display.max_columns = 8
 
 reg_exp = re.compile(r'\d{1,}:.+')
