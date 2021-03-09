@@ -45,11 +45,13 @@ for col in col_show:
     print(lower_bound, upper_bound)
     remove_outliers = df[df[col].between(lower_bound, upper_bound, inclusive=True)]
     outliers = pd.concat([df, remove_outliers]).drop_duplicates(keep=False)
-    print(outliers)
+    print('Выброс\n', outliers)
 
 
 # Вывод: В выбранных полях исследуемой выборки обнаружены выбросы:
 # 1. Поле 2: Age. Выброс объясняется некорректной интрепретацией значения поля либо ошибкой передачи данных.
 # Например, результаты изменений заносились вручную от руки, в при сканировании результатов, система распознавания
 # текста ошибочно интерпретировала 2 как 9.
-# 2. Поле 4: rectal temperature.
+# 2. Поле 4: rectal temperature. Выбросы не являются критичными, так как вполне могут лежать в указанных диапазонах и
+# могут испольховаться в дальнейшем
+
