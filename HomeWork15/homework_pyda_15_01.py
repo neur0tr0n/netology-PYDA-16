@@ -76,10 +76,12 @@ people_fully_vaccinated = most_popular_vaccine['people_fully_vaccinated'] / 1000
 width = 0.35
 plt.bar(most_popular_vaccine_list, people_vaccinated, width, color='b')
 plt.bar(most_popular_vaccine_list, people_fully_vaccinated, width, color='r')
-plt.legend(labels=['Fully Vaccinated People', 'Vaccinated People'])
+plt.legend(labels=['Vaccinated People','Fully Vaccinated People'])
 plt.title('Most Popular Vaccine and Its Full Cycle Usage')
 plt.xlabel('Vaccines')
 plt.ylabel('Vaccinated, millions')
 plt.xticks(rotation=90)
+plt.autoscale(tight=True)
+plt.margins(tight=True)
 plt.show()
 
