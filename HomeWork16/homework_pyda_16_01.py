@@ -16,16 +16,22 @@ prizes = {
     r'\d00': 2,
     r'\d{2}0': 1
 }
-# СИло попыток
-trials = 10
+# Число попыток игрока
+user_trials = 10
 # Банк игрока
-bank = 100
-num = 9
-pattern_len = 3
-pattern = ''
-for i in range(trials):
+user_bank = 100
+# Колесо автомата с числами
+AUTOMATE_PIN = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+# Количество одновременно выпадающих чисел автомата
+AUTOMATE_PATTERN = 3
+
+def make_trial():
     pattern = ''
-    for p in range(pattern_len):
-        pattern = pattern + str(random.randint(0, num))
-    print(pattern)
+    for p in range(AUTOMATE_PATTERN):
+        pattern = pattern + AUTOMATE_PIN[random.randint(0, len(AUTOMATE_PIN) - 1)]
+    return pattern
+
+for i in range(user_trials):
+    print(make_trial())
+
 
