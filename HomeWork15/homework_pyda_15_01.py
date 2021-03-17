@@ -67,19 +67,20 @@ plt.show()
 # а также числу людей, прошедших полный цикл вакцинации определенной вакциной
 
 most_popular_vaccine = df[['vaccines', 'daily_vaccinations', 'people_fully_vaccinated']].groupby('vaccines')\
-    .agg({'daily_vaccinations':np.sum, 'people_fully_vaccinated': np.max})\
+    .agg({'daily_vaccinations': np.sum, 'people_fully_vaccinated': np.max})\
     .sort_values('daily_vaccinations', ascending=False).head(10)
 print(most_popular_vaccine)
 most_popular_vaccine_list = most_popular_vaccine.index
 people_vaccinated = most_popular_vaccine['daily_vaccinations'] / 1000000
 people_fully_vaccinated = most_popular_vaccine['people_fully_vaccinated'] / 1000000
 width = 0.5
-plt.bar(most_popular_vaccine_list, people_vaccinated, width, color='b')
-plt.bar(most_popular_vaccine_list, people_fully_vaccinated, width, color='r')
+plt.barh(most_popular_vaccine_list, people_vaccinated, width, color='b')
+plt.barh(most_popular_vaccine_list, people_fully_vaccinated, width, color='r')
 plt.legend(labels=['Vaccinated People','Fully Vaccinated People'])
 plt.title('Most Popular Vaccine and Its Full Cycle Usage')
 plt.xlabel('Vaccines')
 plt.ylabel('Vaccinated, millions')
 plt.xticks(rotation=90)
+plt.figure(figsize=(50, 10))
 plt.show()
 
