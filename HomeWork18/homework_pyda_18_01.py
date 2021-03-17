@@ -41,7 +41,15 @@ print(result)
 print(accuracy_score(y_test, y_predict))
 print(lda.coef_)
 plt.scatter(x_train['sepal length (cm)'], x_train['sepal width (cm)'], c=y_train)
+plt.xlabel('sepal length (cm)')
+plt.ylabel('sepal width (cm)')
 plt.show()
 
+plt.title('Ошибка предсказания')
+plt.scatter(x_test['sepal length (cm)'], x_test['sepal width (cm)'], c=y_test)
+plt.scatter(x_test['sepal length (cm)'], x_test['sepal width (cm)'], c=abs(y_predict - y_test))
+plt.xlabel('sepal length (cm)')
+plt.ylabel('sepal width (cm)')
+plt.show()
 
 
