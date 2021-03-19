@@ -16,6 +16,8 @@ from matplotlib import colors
 from sklearn.model_selection import train_test_split
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.metrics import accuracy_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
 
 cmap = colors.LinearSegmentedColormap(
     'red_blue_classes',
@@ -89,13 +91,59 @@ plt.ylabel('sepal width (cm)')
 plt.title(f'Классификация модели. Два класса. Центроиды')
 plt.scatter(sx_train['sepal length (cm)'], sx_train['sepal width (cm)'], c=sy_train)
 plt.scatter(scentroids[:, 0], scentroids[:, 1], s=150, c='r', marker='*')
-
 nx, ny = 200, 100
 x_min, x_max = plt.xlim()
 y_min, y_max = plt.ylim()
 xx, yy = np.meshgrid(np.linspace(x_min, x_max, nx), np.linspace(y_min, y_max, ny))
 Z = slda.predict_proba(np.c_[xx.ravel(), yy.ravel()])
 Z = Z[:, 1].reshape(xx.shape)
-plt.pcolormesh(xx, yy, Z, cmap='red_blue_classes', norm=colors.Normalize(0., 1.), zorder=-1)
+plt.pcolormesh(xx, yy, Z, cmap='red_blue_classes', shading='auto', zorder=-1)
 plt.contour(xx, yy, Z, [0.5], linewidths=2., colors='white')
+plt.show()
+# Кластеризация
+x = df[['sepal length (cm)', 'sepal width (cm)']]
+plt.xlabel('sepal length (cm)')
+plt.ylabel('sepal width (cm)')
+plt.title(f'Кластеризация')
+plt.scatter(x['sepal length (cm)'], x['sepal width (cm)'], s=100, cmap='autumn')
+plt.show()
+scaler = StandardScaler()
+x_scaled = scaler.fit_transform(x)
+plt.xlabel('sepal length (cm)')
+plt.ylabel('sepal width (cm)')
+plt.title(f'Кластеризация. Нормализация')
+plt.scatter(x_scaled[:, 0], x_scaled[:, 1], s=100, cmap='autumn')
+plt.show()
+kmeans = KMeans(n_clusters=3)
+clusters = kmeans.fit_predict(x_scaled)
+plt.scatter(x_scaled[:, 0], x_scaled[:, 1], cmap='autumn', c=clusters, s=60)
+plt.xlabel('sepal length (cm)')
+plt.ylabel('sepal width (cm)')
+plt.title(f'Кластеризаци. Разбиение')
+plt.show()
+# Строим график локтя
+inertias_list = []
+ks = range(1, 20)
+for i in ks:
+    kmean = KMeans(n_clusters=i)
+    cluster = kmean.fit_predict(x_scaled)
+    inertias_list.append(kmean.inertia_)
+plt.plot(ks, inertias_list)
+plt.plot(ks, inertias_list, 'ro')
+plt.show()
+# Строим кластеризацию на основе например 5 кластеров
+kmeans = KMeans(n_clusters=5)
+clusters = kmeans.fit_predict(x_scaled)
+plt.scatter(x_scaled[:, 0], x_scaled[:, 1], cmap='autumn', c=clusters, s=60)
+plt.xlabel('sepal length (cm)')
+plt.ylabel('sepal width (cm)')
+plt.title(f'Кластеризаци. Разбиение на 5 кластеров')
+plt.show()
+# Но самым оптимальным будет разбиение на 2 кластера
+kmeans = KMeans(n_clusters=2)
+clusters = kmeans.fit_predict(x_scaled)
+plt.scatter(x_scaled[:, 0], x_scaled[:, 1], cmap='autumn', c=clusters, s=60)
+plt.xlabel('sepal length (cm)')
+plt.ylabel('sepal width (cm)')
+plt.title(f'Кластеризаци. Разбиение на 2 кластера')
 plt.show()
